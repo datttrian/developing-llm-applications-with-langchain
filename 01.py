@@ -1,13 +1,15 @@
-# added/edited
 import os
 
+import openai
 from dotenv import load_dotenv
 from langchain.chains.conversation.base import ConversationChain
 from langchain.chains.llm import LLMChain
 from langchain.memory.buffer import ConversationBufferMemory
 from langchain.memory.summary import ConversationSummaryMemory
-from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
-from langchain_community.llms import HuggingFaceHub  # pylint: disable=no-name-in-module.
+from langchain_community.chat_message_histories.in_memory import \
+    ChatMessageHistory
+from langchain_community.llms import \
+    HuggingFaceHub  # pylint: disable=no-name-in-module.
 from langchain_core.prompts.chat import ChatPromptTemplate
 from langchain_core.prompts.prompt import PromptTemplate
 from langchain_openai import OpenAI
@@ -17,7 +19,7 @@ load_dotenv()
 
 
 # Set your Hugging Face API token
-huggingfacehub_api_token = os.environ["HUGGINGFACE_API_KEY"]  # added/edited
+huggingfacehub_api_token = os.environ["HUGGINGFACE_API_KEY"]
 
 # Define the LLM
 llm = HuggingFaceHub(
@@ -33,7 +35,7 @@ print(output)
 
 
 # Set your API Key from OpenAI
-
+openai.api_key = os.environ["OPENAI_API_KEY"]
 # Define the LLM
 llm = OpenAI(model_name="gpt-3.5-turbo-instruct")  # type: ignore
 
@@ -44,10 +46,8 @@ output = llm.invoke(question)
 print(output)
 
 
-# added/edited
-
 # Set your Hugging Face API token
-huggingfacehub_api_token = os.environ["HUGGINGFACE_API_KEY"]  # added/edited
+huggingfacehub_api_token = os.environ["HUGGINGFACE_API_KEY"]
 
 # Create a prompt template from the template string
 template = (
@@ -66,8 +66,6 @@ question = "How does LangChain make LLM application development easier?"
 print(llm_chain.run(question))
 
 
-# added/edited
-
 # Set your API Key from OpenAI
 
 # Define an OpenAI chat model
@@ -84,9 +82,6 @@ prompt_template = ChatPromptTemplate.from_messages(
 # Insert a question into the template and call the model
 full_prompt = prompt_template.format_messages(question="How can I retain learning?")
 llm(full_prompt)
-
-
-# added/edited
 
 
 # Set your API Key from OpenAI
@@ -107,9 +102,6 @@ ai_response = chat(history.messages)
 print(ai_response)
 
 
-# added/edited
-
-
 # Set your API Key from OpenAI
 chat = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0)  # type: ignore
 
@@ -122,9 +114,6 @@ buffer_chain = ConversationChain(llm=chat, memory=memory, verbose=True)
 # Invoke the chain with the inputs provided
 buffer_chain.predict(input="Write Python code to draw a scatter plot.")
 buffer_chain.predict(input="Use the Seaborn library.")
-
-
-# added/edited
 
 
 # Set your API Key from OpenAI
