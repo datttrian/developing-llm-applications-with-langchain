@@ -6,10 +6,8 @@ from langchain.chains.conversation.base import ConversationChain
 from langchain.chains.llm import LLMChain
 from langchain.memory.buffer import ConversationBufferMemory
 from langchain.memory.summary import ConversationSummaryMemory
-from langchain_community.chat_message_histories.in_memory import \
-    ChatMessageHistory
-from langchain_community.llms import \
-    HuggingFaceHub  # pylint: disable=no-name-in-module.
+from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
+from langchain_community.llms import HuggingFaceHub  # pylint: disable=no-name-in-module
 from langchain_core.prompts.chat import ChatPromptTemplate
 from langchain_core.prompts.prompt import PromptTemplate
 from langchain_openai import OpenAI
