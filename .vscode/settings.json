@@ -4,5 +4,8 @@
     "gitdoc.autoCommitDelay": 60000,
     "gitdoc.autoPushDelay": 0,
     "gitdoc.commitMessageFormat": "ccc, LLL d, y, h:mm a '+00:00'",
+    "flake8.args": [
+        "--ignore=E501,E201"
+    ],
     "files.insertFinalNewline": true
 }
