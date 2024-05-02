@@ -9,7 +9,6 @@ from langchain_core.runnables.passthrough import RunnablePassthrough
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_openai.llms.base import OpenAI
 
-
 model = ChatOpenAI()
 prompt = ChatPromptTemplate.from_template(
     "You are a skilled poet. Write a haiku about the following topic: {topic}"

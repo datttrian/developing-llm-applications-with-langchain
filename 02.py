@@ -1,17 +1,15 @@
 # Import library
-from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
+from langchain.chains.qa_with_sources.retrieval import \
+    RetrievalQAWithSourcesChain
 from langchain.chains.retrieval_qa.base import RetrievalQA
-from langchain.text_splitter import (
-    CharacterTextSplitter,
-    RecursiveCharacterTextSplitter,
-)
+from langchain.text_splitter import (CharacterTextSplitter,
+                                     RecursiveCharacterTextSplitter)
 from langchain_community.document_loaders import HNLoader, PyPDFLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_community.document_loaders.html import UnstructuredHTMLLoader
 from langchain_community.vectorstores.chroma import Chroma
 from langchain_openai.embeddings.base import OpenAIEmbeddings
 from langchain_openai.llms.base import OpenAI
-
 
 # Create a document loader for attention_is_all_you_need.pdf
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
