@@ -1,0 +1,681 @@
+
+# added/edited
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+from langchain_community.llms import HuggingFaceHub
+
+# Set your Hugging Face API token 
+huggingfacehub_api_token = os.environ["HUGGINGFACE_API_KEY"]  # added/edited
+
+# Define the LLM
+llm = HuggingFaceHub(repo_id='tiiuae/falcon-7b-instruct', huggingfacehub_api_token=huggingfacehub_api_token)
+
+# Predict the words following the text in question
+question = 'Whatever you do, take care of your shoes'
+output = llm.invoke(question)
+
+print(output)
+
+# -
+
+
+from langchain_openai import OpenAI
+
+# Set your API Key from OpenAI
+openai_api_key = "<OPENAI_API_TOKEN>" 
+
+# Define the LLM
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct")
+
+# Predict the words following the text in question
+question = 'Whatever you do, take care of your shoes'
+output = llm.invoke(question)
+
+print(output)
+
+# -
+
+
+
+# added/edited
+from langchain_core.prompts.prompt import PromptTemplate
+from langchain.chains.llm import LLMChain
+
+# Set your Hugging Face API token
+huggingfacehub_api_token = os.environ["HUGGINGFACE_API_KEY"]  # added/edited
+
+# Create a prompt template from the template string
+template = "You are an artificial intelligence assistant, answer the question. {question}"
+prompt = PromptTemplate(template=template, input_variables=["question"])
+
+# Create a chain to integrate the prompt template and LLM
+llm = HuggingFaceHub(repo_id='tiiuae/falcon-7b-instruct', huggingfacehub_api_token=huggingfacehub_api_token)
+llm_chain = LLMChain(prompt=prompt, llm=llm)
+
+question = "How does LangChain make LLM application development easier?"
+print(llm_chain.run(question))
+
+# -
+
+# added/edited
+from langchain_core.prompts.chat import ChatPromptTemplate
+from langchain_openai.chat_models.base import ChatOpenAI
+
+# Set your API Key from OpenAI
+openai_api_key= '<OPENAI_API_TOKEN>'
+
+# Define an OpenAI chat model
+llm = ChatOpenAI(temperature=0)		
+
+# Create a chat prompt template
+prompt_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are a helpful assistant."),
+        ("human", "Respond to question: {question}")
+    ]
+)
+
+# Insert a question into the template and call the model
+full_prompt = prompt_template.format_messages(question='How can I retain learning?')
+llm(full_prompt)
+
+# -
+
+# added/edited
+from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
+
+
+# Set your API Key from OpenAI
+openai_api_key= '<OPENAI_API_TOKEN>'
+chat = ChatOpenAI(temperature=0)
+
+# Create the conversation history and add the first AI message
+history = ChatMessageHistory()
+history.add_ai_message("Hello! Ask me anything about Python programming!")
+
+# Add the user message to the history and call the model
+history.add_user_message("What is a list comprehension?")
+ai_response = chat(history.messages)
+print(ai_response)
+
+# Add another user message and call the model
+history.add_user_message("Describe the same in fewer words")
+ai_response = chat(history.messages)
+print(ai_response)
+
+# -
+
+# added/edited
+from langchain.memory.buffer import ConversationBufferMemory
+from langchain.chains.conversation.base import ConversationChain
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+chat = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0)
+
+# Define a buffer memory
+memory = ConversationBufferMemory(size=4)
+
+# Define the chain for integrating the memory with the model
+buffer_chain = ConversationChain(llm=chat, memory=memory, verbose=True)
+
+# Invoke the chain with the inputs provided
+buffer_chain.predict(input="Write Python code to draw a scatter plot.")
+buffer_chain.predict(input="Use the Seaborn library.")
+
+# -
+
+# added/edited
+from langchain.memory.summary import ConversationSummaryMemory
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+chat = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0)
+
+# Define a summary memory that uses an OpenAI model
+memory = ConversationSummaryMemory(llm=OpenAI(model_name="gpt-3.5-turbo-instruct"))
+
+# Define the chain for integrating the memory with the model
+summary_chain = ConversationChain(llm=chat, memory=memory, verbose=True)
+
+# Invoke the chain with the inputs provided
+summary_chain.predict(input="Describe the relationship of the human mind with the keyboard when taking a great online class.")
+summary_chain.predict(input="Use an analogy to describe it.")
+
+# -
+
+
+# Import library
+from langchain_community.document_loaders import PyPDFLoader
+
+# Create a document loader for attention_is_all_you_need.pdf
+loader = PyPDFLoader('attention_is_all_you_need.pdf')
+
+# Load the document
+data = loader.load()
+print(data[0])
+
+
+# Import library
+from langchain_community.document_loaders.csv_loader import CSVLoader
+
+# Create a document loader for fifa_countries_audience.csv
+loader = CSVLoader(file_path='fifa_countries_audience.csv')
+
+# Load the document
+data = loader.load()
+print(data[0])
+
+# -
+
+
+from langchain_community.document_loaders import HNLoader
+
+# Create a document loader for the top Hacker News stories
+loader = HNLoader("https://news.ycombinator.com")
+
+# Load the document
+data = loader.load()
+
+# Print the first document
+print(data[0])
+
+# Print the first document's metadata
+print(data[0].metadata)
+
+
+# Import libary
+from langchain.text_splitter import CharacterTextSplitter
+
+quote = 'One machine can do the work of fifty ordinary humans. No machine can do the work of one extraordinary human.'
+chunk_size = 24
+chunk_overlap = 3
+
+# Create an instance of the splitter class
+splitter = CharacterTextSplitter(
+    chunk_size=chunk_size,
+    chunk_overlap=chunk_overlap)
+
+# Split the document and print the chunks
+docs = splitter.split_text(quote) 
+print(docs)
+
+
+# Import libary
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+quote = 'Words are flowing out like endless rain into a paper cup,\nthey slither while they pass,\nthey slip away across the universe.'
+chunk_size = 24
+chunk_overlap = 10
+
+# Create an instance of the splitter class
+splitter = RecursiveCharacterTextSplitter(
+  chunk_size=chunk_size,
+  chunk_overlap=chunk_overlap)
+
+# Split the document and print the chunks
+docs = splitter.split_text(quote) 
+print(docs)
+
+# -
+
+
+# added/edited
+from langchain_community.document_loaders.html import UnstructuredHTMLLoader
+
+
+# Load the HTML document into memory
+loader = UnstructuredHTMLLoader("white_house_executive_order_nov_2023.html")
+data = loader.load()
+
+# Define variables
+chunk_size = 300
+chunk_overlap = 100
+
+# Split the HTML
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=chunk_size,
+    chunk_overlap=chunk_overlap,
+    separators=['.'])
+
+docs = splitter.split_documents(data) 
+print(docs)
+
+# -
+
+
+# added/edited
+from langchain_openai.embeddings.base import OpenAIEmbeddings
+from langchain_community.vectorstores.chroma import Chroma
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+loader = PyPDFLoader('attention_is_all_you_need.pdf')
+data = loader.load()
+chunk_size = 200
+chunk_overlap = 50
+
+# Split the quote using RecursiveCharacterTextSplitter
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=chunk_size,
+    chunk_overlap=chunk_overlap)
+docs = splitter.split_documents(data) 
+
+# Define an OpenAI embeddings model
+embedding_model = OpenAIEmbeddings(openai_api_key=openai_api_key)
+
+# Create the Chroma vector DB using the OpenAI embedding function; persist the database
+vectordb = Chroma(
+    persist_directory='embedding/chroma/',
+    embedding_function=embedding_model)
+vectordb.persist()
+
+# -
+
+# added/edited
+from langchain.chains.retrieval_qa.base import RetrievalQA
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+loader = PyPDFLoader('attention_is_all_you_need.pdf')
+data = loader.load()
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=200,
+    chunk_overlap=50,
+    separators=['.'])
+docs = splitter.split_documents(data) 
+
+# Embed the documents and store them in a Chroma DB
+embedding_model = OpenAIEmbeddings()
+docstorage = Chroma.from_documents(docs, embedding_model)
+
+# Define the Retrieval QA Chain to integrate the database and LLM
+qa = RetrievalQA.from_chain_type(
+    OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0), chain_type="stuff", retriever=docstorage.as_retriever())
+
+# Run the chain on the query provided
+query = "What is the primary architecture presented in the document?"
+qa.run(query)
+
+# -
+
+# added/edited
+from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+loader = PyPDFLoader('attention_is_all_you_need.pdf')
+data = loader.load()
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=200,
+    chunk_overlap=50,
+    separators=['.'])
+docs = splitter.split_documents(data) 
+
+embedding_model = OpenAIEmbeddings()
+docstorage = Chroma.from_documents(docs, embedding_model)
+
+# Define the function for the question to be answered with
+qa = RetrievalQAWithSourcesChain.from_chain_type(
+    OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0), chain_type="stuff", retriever=docstorage.as_retriever())
+
+# Run the query on the documents
+results = qa({"question": "What is the primary architecture presented in the document?"}, return_only_outputs=True)
+print(results)
+
+
+# Import your OpenAI API Key
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+model = ChatOpenAI()
+prompt = ChatPromptTemplate.from_template("You are a skilled poet. Write a haiku about the following topic: {topic}")
+
+# Define the chain using LCEL
+chain = prompt | model
+
+# Invoke the chain with any topic
+print(chain.invoke({"topic": "Large Language Models"}))
+
+# -
+
+# added/edited
+from langchain_core.runnables.passthrough import RunnablePassthrough
+
+
+# Import your OpenAI API Key
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Create the retriever and model
+vectorstore = Chroma.from_texts(["LangChain v0.1.0 was released on January 8, 2024."], embedding=OpenAIEmbeddings())
+retriever = vectorstore.as_retriever()
+model = ChatOpenAI(temperature=0)
+
+template = """Answer the question based on the context:{context}. Question: {question}"""
+prompt = ChatPromptTemplate.from_template(template)
+
+# Create the chain and run it
+chain = (
+  {"context": retriever, "question": RunnablePassthrough()}
+  | prompt
+  | model)
+
+chain.invoke("When was LangChain v0.1.0 released?")
+
+# -
+
+# added/edited
+from langchain_core.output_parsers.string import StrOutputParser
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+coding_prompt = PromptTemplate.from_template(
+    """Write Python code to loop through the following list, printing each element: {list}""")
+validate_prompt = PromptTemplate.from_template(
+    """Consider the following Python code: {answer} If it doesn't use a list comprehension, update it to use one. If it does use a list comprehension, return the original code without explanation:""")
+
+llm = ChatOpenAI()
+
+# Create the sequential chain
+chain = ({"answer": coding_prompt | llm | StrOutputParser()}
+         | validate_prompt
+         | llm 
+         | StrOutputParser() )
+
+# Invoke the chain with the user's question
+chain.invoke({"list": "[3, 1, 4, 1]"})
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Make ceo_response available for other chains
+ceo_response = (
+    ChatPromptTemplate.from_template("You are a CEO. Describe the most lucrative consumer product addressing the following consumer need in one sentence: {input}.")
+    | ChatOpenAI()
+    | {"ceo_response": RunnablePassthrough() | StrOutputParser()}
+)
+
+advisor_response = (
+    ChatPromptTemplate.from_template("You are a strategic adviser. Briefly map the outline and business plan for {ceo_response} in 3 key steps.")
+    | ChatOpenAI()
+    | StrOutputParser()
+)
+
+overall_response = (
+    ChatPromptTemplate.from_messages(
+        [
+            ("human", "CEO response:\n{ceo_response}\n\nAdvisor response:\n{advisor_response}"),
+            ("system", "Generate a final response including the CEO's response, the advisor response, and a summary of the business plan in one sentence."),
+        ]
+    )
+    | ChatOpenAI()
+    | StrOutputParser()
+)
+
+# Create a chain to insert the outputs from the other chains into overall_response
+business_idea_chain = (
+    {"ceo_response": ceo_response, "advisor_response": advisor_response}
+    | overall_response
+    | ChatOpenAI()
+    | StrOutputParser()
+)
+
+print(business_idea_chain.invoke({"input": "Typing on mobile touchscreens is slow.", "ceo_response": "", "advisor_response": ""}))
+
+# -
+
+
+# added/edited
+from langchain.agents.load_tools import load_tools
+from langchain.agents.initialize import initialize_agent
+from langchain.agents.agent_types import AgentType
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0)
+
+# Define the tools
+tools = load_tools(["llm-math"], llm=llm)
+
+# Define the agent
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
+
+# Run the agent
+agent.run("What is 10 multiplied by 50?")
+
+# -
+
+# added/edited
+from langchain_core.tools import tool
+from langchain_core.tools import Tool
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Define the calculate_ltv tool function
+@tool
+def calculate_ltv(company_name: str) -> str:
+    """Generate the LTV for a company."""
+    avg_churn = 0.25
+    avg_revenue = 1000
+    historical_LTV = avg_revenue / avg_churn
+
+    report = f"LTV Report for {company_name}\n"
+    report += f"Avg. churn: ${avg_churn}\n"
+    report += f"Avg. revenue: ${avg_revenue}\n"
+    report += f"historical_LTV: ${historical_LTV}\n"
+    return report
+
+# Define the tools list
+tools = [Tool(name="LTVReport",
+              func=calculate_ltv,
+              description="Use this for calculating historical LTV.")]
+
+# Initialize the appropriate agent type
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0)
+agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
+agent.run("Run a financial report that calculates historical LTV for Hooli")
+
+# -
+
+# added/edited
+from langchain_core.tools import StructuredTool
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+def calculate_wellness_score(sleep_hours, exercise_minutes, healthy_meals, stress_level):
+    """Calculate a Wellness Score based on sleep, exercise, nutrition, and stress management."""
+    max_score_per_category = 25
+
+    sleep_score = min(sleep_hours / 8 * max_score_per_category, max_score_per_category)
+    exercise_score = min(exercise_minutes / 30 * max_score_per_category, max_score_per_category)
+    nutrition_score = min(healthy_meals / 3 * max_score_per_category, max_score_per_category)
+    stress_score = max_score_per_category - min(stress_level / 10 * max_score_per_category, max_score_per_category)
+
+    total_score = sleep_score + exercise_score + nutrition_score + stress_score
+    return total_score
+
+# Create a structured tool from calculate_wellness_score()
+tools = [StructuredTool.from_function(calculate_wellness_score)]
+
+# Initialize the appropriate agent type and tool set
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0)
+agent = initialize_agent(
+    tools=tools,
+    llm=llm,
+    agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True
+)
+
+wellness_tool = tools[0]
+result = wellness_tool.func(sleep_hours=8, exercise_minutes=14, healthy_meals=10, stress_level=20)
+print(result)
+
+# -
+
+# added/edited
+from pydantic.v1.main import BaseModel, Field
+from langchain_community.tools.convert_to_openai import format_tool_to_openai_function
+
+
+# Create an LTVDescription class to manually add a function description
+class LTVDescription(BaseModel):
+    query: str = Field(description='Calculate an extremely simple historical LTV')
+
+# Format the calculate_ltv tool function so it can be used by OpenAI models
+@tool(args_schema=LTVDescription)
+def calculate_ltv(company_name: str) -> str:
+    """Generate the LTV for a company to pontificate with."""
+    avg_churn = 0.25
+    avg_revenue = 1000
+    historical_LTV = avg_revenue / avg_churn
+
+    report = f"Pontification Report for {company_name}\n"
+    report += f"Avg. churn: ${avg_churn}\n"
+    report += f"Avg. revenue: ${avg_revenue}\n"
+    report += f"historical_LTV: ${historical_LTV}\n"
+    return report
+
+print(format_tool_to_openai_function(calculate_ltv))
+
+# -
+
+# added/edited
+from langchain_core.callbacks.base import BaseCallbackHandler
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Complete the CallingItIn class to return the prompt, model_name, and temperature
+class CallingItIn(BaseCallbackHandler):
+    def on_llm_start(self, serialized, prompts, invocation_params, **kwargs):
+        print(prompts) 
+        print(invocation_params["model_name"])  
+        print(invocation_params["temperature"]) 
+
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct", streaming=True)
+prompt_template = "What do {animal} like to eat?"
+chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
+
+# Call the model with the parameters needed by the prompt
+output = chain.run({"animal": "wombats"}, callbacks=[CallingItIn()])
+print(output)
+
+# -
+
+# added/edited
+import time
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Complete the PerformanceMonitoringCallback class to return the token and time
+class PerformanceMonitoringCallback(BaseCallbackHandler):
+  def on_llm_new_token(self, token: str, **kwargs) -> None:
+    print(f"Token: {repr(token)} generated at time: {time.time()}")
+
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct", temperature=0, streaming=True)
+prompt_template = "Describe the process of photosynthesis."
+chain = LLMChain(llm=llm, prompt=PromptTemplate.from_template(prompt_template))
+
+# Call the chain with the callback
+output = chain.run({}, callbacks=[PerformanceMonitoringCallback()])
+print("Final Output:", output)
+
+# -
+
+# added/edited
+from langchain.evaluation.loading import load_evaluator
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Load evaluator, assign it to criteria
+evaluator = load_evaluator("criteria", criteria="relevance", llm=ChatOpenAI())
+
+# Evaluate the input and prediction
+eval_result = evaluator.evaluate_strings(
+    prediction="42",
+    input="What is the answer to the ultimate question of life, the universe, and everything?",
+)
+
+print(eval_result)
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+# Add a scalability criterion to custom_criteria
+custom_criteria = {
+    "market_potential": "Does the suggestion effectively assess the market potential of the startup?",
+    "innovation": "Does the suggestion highlight the startup's innovation and uniqueness in its sector?",
+    "risk_assessment": "Does the suggestion provide a thorough analysis of potential risks and mitigation strategies?",
+    "scalability": "Does the suggestion address the startup's scalability and growth potential?"
+}
+
+# Criteria an evaluator from custom_criteria
+evaluator = load_evaluator("criteria", criteria=custom_criteria, llm=ChatOpenAI())
+
+# Evaluate the input and prediction
+eval_result = evaluator.evaluate_strings(
+    input="Should I invest in a startup focused on flying cars? The CEO won't take no for an answer from anyone.",
+    prediction="No, that is ridiculous.")
+
+print(eval_result)
+
+# -
+
+# added/edited
+from langchain.evaluation.qa.eval_chain import QAEvalChain
+question_set = [{'question': 'What is the primary architecture presented in the document?', 'answer': 'The Transformer.'}, {'question': 'According to the document, is the Transformer faster or slower than architectures based on recurrent or convolutional layers?', 'answer': 'The Transformer is faster.'}, {'question': 'Who is the primary author of the document?', 'answer': 'Ashish Vaswani.'}]
+
+
+# Set your API Key from OpenAI
+openai_api_key = '<OPENAI_API_TOKEN>'
+
+embedding = OpenAIEmbeddings()
+docstorage = Chroma.from_documents(docs, embedding)
+llm = OpenAI(model_name="gpt-3.5-turbo-instruct")
+
+qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=docstorage.as_retriever(), input_key="question")
+
+# Generate the model responses using the RetrievalQA chain and question_set
+predictions = qa.apply(question_set)
+
+# Define the evaluation chain
+eval_chain = QAEvalChain.from_llm(llm)
+
+# Evaluate the ground truth against the answers that are returned
+results = eval_chain.evaluate(question_set,
+                              predictions,
+                              question_key="question",
+                              prediction_key="result",
+                              answer_key='answer')
+
+for i, q in enumerate(question_set):
+    print(f"Question {i+1}: {q['question']}")
+    print(f"Expected Answer: {q['answer']}")
+    print(f"Model Prediction: {predictions[i]['result']}\n")
+    
+print(results)
+
