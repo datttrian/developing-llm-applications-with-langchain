@@ -66,8 +66,6 @@ question = "How does LangChain make LLM application development easier?"
 print(llm_chain.run(question))
 
 
-# Set your API Key from OpenAI
-
 # Define an OpenAI chat model
 llm = ChatOpenAI(temperature=0)
 

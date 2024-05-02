@@ -94,8 +94,6 @@ docs = splitter.split_documents(data)  # type: ignore
 print(docs)
 
 
-# Set your API Key from OpenAI
-
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
 chunk_size = 200
@@ -116,8 +114,6 @@ vectordb = Chroma(
 )
 vectordb.persist()
 
-
-# Set your API Key from OpenAI
 
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
@@ -142,8 +138,6 @@ qa = RetrievalQA.from_chain_type(
 query = "What is the primary architecture presented in the document?"
 qa.run(query)
 
-
-# Set your API Key from OpenAI
 
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
