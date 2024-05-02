@@ -1,9 +1,10 @@
 # Import library
-from langchain.chains.qa_with_sources.retrieval import \
-    RetrievalQAWithSourcesChain
+from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
 from langchain.chains.retrieval_qa.base import RetrievalQA
-from langchain.text_splitter import (CharacterTextSplitter,
-                                     RecursiveCharacterTextSplitter)
+from langchain.text_splitter import (
+    CharacterTextSplitter,
+    RecursiveCharacterTextSplitter,
+)
 from langchain_community.document_loaders import HNLoader, PyPDFLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader
 from langchain_community.document_loaders.html import UnstructuredHTMLLoader
@@ -76,9 +77,6 @@ docs = splitter.split_text(quote)
 print(docs)
 
 
-# added/edited
-
-
 # Load the HTML document into memory
 loader = UnstructuredHTMLLoader("white_house_executive_order_nov_2023.html")  # type: ignore
 data = loader.load()
@@ -96,11 +94,7 @@ docs = splitter.split_documents(data)  # type: ignore
 print(docs)
 
 
-# added/edited
-
-
 # Set your API Key from OpenAI
-openai_api_key = "<OPENAI_API_TOKEN>"
 
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
@@ -114,7 +108,7 @@ splitter = RecursiveCharacterTextSplitter(
 docs = splitter.split_documents(data)  # type: ignore
 
 # Define an OpenAI embeddings model
-embedding_model = OpenAIEmbeddings(openai_api_key=openai_api_key)  # type: ignore
+embedding_model = OpenAIEmbeddings()
 
 # Create the Chroma vector DB using the OpenAI embedding function; persist the database
 vectordb = Chroma(
@@ -123,11 +117,7 @@ vectordb = Chroma(
 vectordb.persist()
 
 
-# added/edited
-
-
 # Set your API Key from OpenAI
-openai_api_key = "<OPENAI_API_TOKEN>"
 
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
@@ -153,11 +143,7 @@ query = "What is the primary architecture presented in the document?"
 qa.run(query)
 
 
-# added/edited
-
-
 # Set your API Key from OpenAI
-openai_api_key = "<OPENAI_API_TOKEN>"
 
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
