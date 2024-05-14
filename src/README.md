@@ -2,11 +2,11 @@
 
 ## Introduction to LangChain & Chatbot Mechanics
 
-- Hugging Face models in LangChain!
-- OpenAI models in LangChain!
-- Prompt templates and chaining
-- Chat prompt templates
-- Integrating a chatbot message history
+- [Hugging Face models in LangChain!](hugging_face_models_in_langchain.py)
+- [OpenAI models in LangChain!](openai_models_in_langchain.py)
+- [Prompt templates and chaining](prompt_templates_and_chaining.py)
+- [Chat prompt templates](chat_prompt_templates.py)
+- [Integrating a chatbot message history](integrating_a_chatbot_message_history.py)
 - Creating a memory buffer
 - Implementing a summary memory
 
