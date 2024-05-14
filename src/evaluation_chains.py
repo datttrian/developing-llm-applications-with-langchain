@@ -28,7 +28,6 @@ question_set = [
     },
 ]
 
-
 embedding = OpenAIEmbeddings()
 loader = PyPDFLoader("attention_is_all_you_need.pdf")
 data = loader.load()
