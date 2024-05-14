@@ -1,6 +1,6 @@
 # Developing LLM Applications with LangChain
 
-[![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/datttrian/working-with-the-openai-api/blob/main/src/notebook.ipynb)
+[![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/datttrian/developing-llm-applications-with-langchain/blob/main/src/notebook.ipynb)
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/datttrian/developing-llm-applications-with-langchain)
 
