@@ -16,7 +16,7 @@
 - [CSV document loaders](csv_document_loaders.py)
 - [Third-party document loaders](third_party_document_loaders.py)
 - [Splitting by character](splitting_by_character.py)
-- Recursively splitting by character
+- [Recursively splitting by character](recursively_splitting_by_character.py)
 - Splitting HTML
 - Preparing the documents and vector database
 - Storing and retrieving documents
