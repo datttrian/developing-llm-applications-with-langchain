@@ -17,10 +17,10 @@
 - [Third-party document loaders](third_party_document_loaders.py)
 - [Splitting by character](splitting_by_character.py)
 - [Recursively splitting by character](recursively_splitting_by_character.py)
-- Splitting HTML
-- Preparing the documents and vector database
-- Storing and retrieving documents
-- RAG with sources
+- [Splitting HTML](splitting_html.py)
+- [Preparing the documents and vector database](preparing_the_documents_and_vector_database.py)
+- [Storing and retrieving documents](storing_and_retrieving_documents.py)
+- [RAG with sources](rag_with_sources.py)
 
 ## LangChain Expression Language (LCEL), Chains, and Agents
 
