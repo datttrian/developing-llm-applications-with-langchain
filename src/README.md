@@ -27,8 +27,8 @@
 - [LCEL for LLM chatbot chains](lcel_for_llm_chatbot_chains.py)
 - [LCEL for RAG workflows](lcel_for_rag_workflows.py)
 - [Sequential chains with LCEL](sequential_chains_with_lcel.py)
-- Passing values between chains
-- Zero-Shot ReAct agents
+- [Passing values between chains](passing_values_between_chains.py)
+- [Zero-Shot ReAct agents](zero_shot_react_agents.py)
 
 ## Tools, Troubleshooting, and Evaluation
 
