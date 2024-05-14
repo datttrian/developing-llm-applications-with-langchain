@@ -22,4 +22,4 @@ prompt_template = ChatPromptTemplate.from_messages(
 
 # Insert a question into the template and call the model
 full_prompt = prompt_template.format_messages(question="How can I retain learning?")
-print(llm(full_prompt))
+llm(full_prompt)

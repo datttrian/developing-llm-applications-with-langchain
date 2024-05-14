@@ -25,8 +25,8 @@
 ## LangChain Expression Language (LCEL), Chains, and Agents
 
 - [LCEL for LLM chatbot chains](lcel_for_llm_chatbot_chains.py)
-- LCEL for RAG workflows
-- Sequential chains with LCEL
+- [LCEL for RAG workflows](lcel_for_rag_workflows.py)
+- [Sequential chains with LCEL](sequential_chains_with_lcel.py)
 - Passing values between chains
 - Zero-Shot ReAct agents
 
