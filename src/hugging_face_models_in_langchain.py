@@ -1,8 +1,8 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_community.llms import HuggingFaceHub  # pylint: disable=no-name-in-module
-
+from langchain_community.llms import \
+    HuggingFaceHub  # pylint: disable=no-name-in-module
 
 # Set your Hugging Face API token
 load_dotenv()

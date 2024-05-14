@@ -7,7 +7,8 @@ from langchain.chains.retrieval_qa.base import RetrievalQA
 from langchain.evaluation.loading import load_evaluator
 from langchain.evaluation.qa.eval_chain import QAEvalChain
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.tools.convert_to_openai import format_tool_to_openai_function
+from langchain_community.tools.convert_to_openai import \
+    format_tool_to_openai_function
 from langchain_community.vectorstores.chroma import Chroma
 from langchain_core.callbacks.base import BaseCallbackHandler
 from langchain_core.prompts.prompt import PromptTemplate

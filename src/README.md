@@ -7,8 +7,8 @@
 - [Prompt templates and chaining](prompt_templates_and_chaining.py)
 - [Chat prompt templates](chat_prompt_templates.py)
 - [Integrating a chatbot message history](integrating_a_chatbot_message_history.py)
-- Creating a memory buffer
-- Implementing a summary memory
+- [Creating a memory buffer](creating_a_memory_buffer.py)
+- [Implementing a summary memory](implementing_a_summary_memory.py)
 
 ## Loading and Preparing External Data for Chatbots
 

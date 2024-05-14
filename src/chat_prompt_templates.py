@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from langchain_core.prompts.chat import ChatPromptTemplate
 from langchain_openai.chat_models.base import ChatOpenAI
 
-
 # Set your API Key from OpenAI
 load_dotenv()
 openai.api_key = os.environ["OPENAI_API_KEY"]

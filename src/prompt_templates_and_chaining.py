@@ -2,9 +2,9 @@ import os
 
 from dotenv import load_dotenv
 from langchain.chains.llm import LLMChain
-from langchain_community.llms import HuggingFaceHub  # pylint: disable=no-name-in-module
+from langchain_community.llms import \
+    HuggingFaceHub  # pylint: disable=no-name-in-module
 from langchain_core.prompts.prompt import PromptTemplate
-
 
 # Set your Hugging Face API token
 load_dotenv()
