@@ -9,6 +9,7 @@ from langchain_community.vectorstores.chroma import Chroma
 from langchain_openai.embeddings.base import OpenAIEmbeddings
 from langchain_openai.llms.base import OpenAI
 
+
 # Set your API Key from OpenAI
 load_dotenv()
 openai.api_key = os.environ["OPENAI_API_KEY"]

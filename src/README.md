@@ -24,7 +24,7 @@
 
 ## LangChain Expression Language (LCEL), Chains, and Agents
 
-- LCEL for LLM chatbot chains
+- [LCEL for LLM chatbot chains](lcel_for_llm_chatbot_chains.py)
 - LCEL for RAG workflows
 - Sequential chains with LCEL
 - Passing values between chains
