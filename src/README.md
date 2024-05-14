@@ -32,10 +32,10 @@
 
 ## Tools, Troubleshooting, and Evaluation
 
-- Creating custom tools
-- Scaling custom tools
-- Formatting tools as OpenAI functions
-- Callbacks for troubleshooting
+- [Creating custom tools](creating_custom_tools.py)
+- [Scaling custom tools](scaling_custom_tools.py)
+- [Formatting tools as OpenAI functions](formatting_tools_as_openai_functions.py)
+- [Callbacks for troubleshooting](callbacks_for_troubleshooting.py)
 - Real-time performance monitoring
 - Built-in evaluation criteria
 - Custom evaluation criteria

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain.agents.agent_types import AgentType
 from langchain.agents.initialize import initialize_agent
 from langchain.agents.load_tools import load_tools
-from langchain_openai.llms.base import OpenAI
+from langchain_openai import OpenAI
 
 # Set your API Key from OpenAI
 load_dotenv()
