@@ -12,8 +12,8 @@
 
 ## Loading and Preparing External Data for Chatbots
 
-- PDF document loaders
-- CSV document loaders
+- [PDF document loaders](pdf_document_loaders.py)
+- [CSV document loaders](csv_document_loaders.py)
 - Third-party document loaders
 - Splitting by character
 - Recursively splitting by character
