@@ -2,8 +2,7 @@ import os
 
 import openai
 from dotenv import load_dotenv
-from langchain_community.chat_message_histories.in_memory import \
-    ChatMessageHistory
+from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
 from langchain_openai.chat_models.base import ChatOpenAI
 
 # Set your API Key from OpenAI
